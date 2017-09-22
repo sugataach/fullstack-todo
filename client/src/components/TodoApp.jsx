@@ -19,10 +19,11 @@ export class TodoApp extends React.Component {
   render() {
     return <div>
       <section className="todoApp">
-        <TodoHeader />
+        <TodoHeader addItem={this.props.addItem}/>
         <TodoList {...this.props} />
         <TodoTools filter={this.props.filter}
-                   nbActiveItems={this.getNbActiveItems()} />
+                   nbActiveItems={this.getNbActiveItems()}
+                   markAllAsCompleted={this.props.markAllAsCompleted} />
       </section>
       <Footer />
     </div>

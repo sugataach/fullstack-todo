@@ -4,3 +4,16 @@ export function toggleComplete(itemId) {
     itemId
   }
 }
+
+export function markAllAsCompleted() {
+  return {
+    type: 'MARK_ALL_COMPLETED'
+  }
+}
+
+export function addItem(text) {
+  return {
+    type: 'ADD_ITEM',
+    text
+  }
+}

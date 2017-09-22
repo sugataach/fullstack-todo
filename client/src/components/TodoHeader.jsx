@@ -3,9 +3,9 @@ import React from 'react';
 export default class TodoHeader extends React.Component {
   _handleKeyPress(e) {
     if (e.key === 'Enter' && this.refs.addTodoInput.value != '') {
-      return this.props.addItem(
-        this.refs.addTodoInput.value
-      );
+      var temp = this.refs.addTodoInput.value;
+      this.refs.addTodoInput.value = '';
+      return this.props.addItem(temp);
     }
   }
   render() {

@@ -11,7 +11,7 @@ export default class TodoTools extends React.Component {
         <strong>{this.getNbItemsLeft()}</strong> items left
       </span>
       <button className="clear-completed"
-              onClick={this.props.markCompleted}>
+              onClick={this.props.markAllAsCompleted}>
         Mark all as complete
       </button>
     </footer>
