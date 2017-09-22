@@ -7,13 +7,19 @@ export default class TodoTools extends React.Component {
   }
   render() {
     return <footer className="footer">
-      <span className="todo-count">
-        <strong>{this.getNbItemsLeft()}</strong> items left
-      </span>
-      <button className="clear-completed"
-              onClick={this.props.markAllAsCompleted}>
-        Mark all as complete
-      </button>
+        <div className="row">
+            <div className="all-cnt col-md-6">
+                {this.getNbItemsLeft()} items left
+            </div>
+            <div className="mark-all col-md-6">
+                <a type="button"
+                   onClick={this.props.markAllAsCompleted}
+                   className="btn btn-link">
+                   Mark all as complete
+                </a>
+            </div>
+        </div>
     </footer>
+
   }
 };

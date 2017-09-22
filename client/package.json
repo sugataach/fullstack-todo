@@ -14,8 +14,8 @@
     ]
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Sugata Acharjya",
+  "license": "MIT",
   "dependencies": {
     "classnames": "^2.2.5",
     "immutable": "^3.7.6",

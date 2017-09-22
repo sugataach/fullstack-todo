@@ -4,7 +4,6 @@ import * as actionCreators from '../action_creators';
 import TodoList from './TodoList';
 import TodoHeader from './TodoHeader';
 import TodoTools from './TodoTools';
-import Footer from './Footer';
 
 export class TodoApp extends React.Component {
   getNbActiveItems() {
@@ -17,15 +16,15 @@ export class TodoApp extends React.Component {
     return 0;
   }
   render() {
-    return <div>
-      <section className="todoApp">
-        <TodoHeader addItem={this.props.addItem}/>
-        <TodoList {...this.props} />
-        <TodoTools filter={this.props.filter}
-                   nbActiveItems={this.getNbActiveItems()}
-                   markAllAsCompleted={this.props.markAllAsCompleted} />
-      </section>
-      <Footer />
+    return <div className="todo-container">
+      <header className="header">
+        <h1>Todos</h1>
+      </header>
+      <TodoHeader addItem={this.props.addItem}/>
+      <TodoList {...this.props} />
+      <TodoTools filter={this.props.filter}
+                 nbActiveItems={this.getNbActiveItems()}
+                 markAllAsCompleted={this.props.markAllAsCompleted} />
     </div>
   }
 }

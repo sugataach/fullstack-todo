@@ -14,8 +14,8 @@ export default class TodoList extends React.Component {
     return item.get('status') === 'completed';
   }
   render() {
-    return <section className="main">
-      <ul className="todo-list">
+    return <section className="body">
+      <ul className="todos">
         {this.getItems().map(item =>
           <TodoItem key={item.get('text')}
                     text={item.get('text')}

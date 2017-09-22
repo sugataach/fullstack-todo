@@ -7,7 +7,7 @@ export default class TodoItem extends React.Component {
       'todo': true,
       'completed': this.props.isCompleted
     });
-    return <li className={itemClass}>
+    return <li className={'todo' + (this.props.isCompleted ? ' checked' : '')}>
       <div className="view">
         <input type="checkbox"
                className="toggle"
@@ -16,7 +16,6 @@ export default class TodoItem extends React.Component {
         <label htmlFor="todo">
           {this.props.text}
         </label>
-        <button className="destroy"></button>
       </div>
     </li>
   }

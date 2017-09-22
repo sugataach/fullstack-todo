@@ -26,7 +26,7 @@ store.dispatch({
   }
 });
 
-require('../node_modules/todomvc-app-css/index.css')
+require('./main.css')
 
 ReactDOM.render(
   // wrap Provider component to pass store down to components
