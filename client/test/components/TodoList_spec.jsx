@@ -23,6 +23,7 @@ describe('TodoList', () => {
     expect(items.length).to.equal(1);
     expect(items[0].textContent).to.contain('Immutable');
   });
+
   it('renders a list with all the items present', () => {
     const todos = List.of(
       Map({id: 1, text: 'React', status: 'active'}),

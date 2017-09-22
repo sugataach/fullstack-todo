@@ -1,10 +1,10 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import * as actionCreators from '../action_creators';
 import TodoList from './TodoList';
 import TodoHeader from './TodoHeader';
 import TodoTools from './TodoTools';
 import Footer from './Footer';
-import {connect} from 'react-redux';
-import * as actionCreators from '../action_creators';
 
 export class TodoApp extends React.Component {
   getNbActiveItems() {

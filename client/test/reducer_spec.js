@@ -95,4 +95,46 @@ describe('reducer', () => {
       ]
     }));
   });
+
+  it('handles MARK_ALL_COMPLETED by changing the status of all items to completed', () => {
+    const initialState = fromJS({
+      todos: [
+        {id: 1, text: 'React', status: 'active'},
+        {id: 2, text: 'Redux', status: 'active'},
+        {id: 3, text: 'Immutable', status: 'completed'}
+      ]
+    });
+    const action = {
+      type: 'MARK_ALL_COMPLETED'
+    }
+    const nextState = reducer(initialState, action);
+    expect(nextState).to.equal(fromJS({
+      todos: [
+        {id: 1, text: 'React', status: 'completed'},
+        {id: 2, text: 'Redux', status: 'completed'},
+        {id: 3, text: 'Immutable', status: 'completed'}
+      ]
+    }));
+  });
+
+  it('handles ADD_ITEM by adding the item', () => {
+    const initialState = fromJS({
+      todos: [
+        {id: 1, text: 'React', status: 'active'},
+        {id: 2, text: 'Redux', status: 'active'}
+      ]
+    });
+    const action = {
+      type: 'ADD_ITEM',
+      text: 'Immutable'
+    }
+    const nextState = reducer(initialState, action);
+    expect(nextState).to.equal(fromJS({
+      todos: [
+        {id: 1, text: 'React', status: 'active'},
+        {id: 2, text: 'Redux', status: 'active'},
+        {id: 3, text: 'Immutable', status: 'active'}
+      ]
+    }));
+  });
 });
