@@ -23,9 +23,10 @@ export default class TodoList extends React.Component {
       <ul className="todo-list">
         {this.getItems().map(item =>
           <TodoItem key={item.get('text')}
-            text={item.get('text')}
-            isCompleted={this.isCompleted(item)}
-            toggleComplete={this.props.toggleComplete}/>
+                    text={item.get('text')}
+                    id={item.get('id')}
+                    isCompleted={this.isCompleted(item)}
+                    toggleComplete={this.props.toggleComplete}/>
         )}
       </ul>
     </section>
