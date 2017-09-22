@@ -12,7 +12,7 @@ export default class TodoItem extends React.Component {
         <input type="checkbox"
                className="toggle"
                checked={this.props.isCompleted}
-               onClick={() => this.props.toggleComplete(this.props.id)} />
+               onChange={() => this.props.toggleComplete(this.props.id)} />
         <label htmlFor="todo">
           {this.props.text}
         </label>
