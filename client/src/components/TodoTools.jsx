@@ -9,7 +9,7 @@ export default class TodoTools extends React.Component {
     return <footer className="footer">
         <div className="row">
             <div className="all-cnt col-md-6">
-                {this.getNbItemsLeft()} items left
+                {this.getNbItemsLeft()} {this.getNbItemsLeft() === 1 ? 'item' : 'items'} left
             </div>
             <div className="mark-all col-md-6">
                 <a type="button"

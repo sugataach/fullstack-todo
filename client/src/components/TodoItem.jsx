@@ -8,14 +8,19 @@ export default class TodoItem extends React.Component {
       'completed': this.props.isCompleted
     });
     return <li className={'todo' + (this.props.isCompleted ? ' checked' : '')}>
-      <div className="view">
-        <input type="checkbox"
-               className="toggle"
-               checked={this.props.isCompleted}
-               onChange={() => this.props.toggleComplete(this.props.id)} />
-        <label htmlFor="todo">
-          {this.props.text}
-        </label>
+      <div className="row">
+        <div className="all-cnt col-md-6">
+          <input type="checkbox"
+                 className="toggle"
+                 checked={this.props.isCompleted}
+                 onChange={() => this.props.toggleComplete(this.props.id)} />
+          <label htmlFor="todo">
+            {this.props.text}
+          </label>
+        </div>
+        <div className="mark-all col-md-6">
+          <button className="reorder"></button>
+        </div>
       </div>
     </li>
   }

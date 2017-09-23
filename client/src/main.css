@@ -45,7 +45,7 @@ input, button {
   padding: 20px 20px;
 }
 .todo-container .input-form input {
-  border-color: #aeadad;
+  border-color: black;
   border-width: 1px;
   border-radius: 6px;
 }
@@ -106,6 +106,7 @@ input, button {
   background-image: none;
   background-color: #00aeef;
   color: #454545;
+  cursor: pointer;
 }
 .todo-container .footer {
   height: 53px;
@@ -122,6 +123,9 @@ input, button {
   display: inline;
   text-align: right;
   float: right;
+}
+.col-md-6 {
+  display: inline !important;
 }
 .todo-container .footer .mark-all .btn {
   color: #4689c7;
@@ -144,6 +148,7 @@ input, button {
   padding: 0 22px;
   line-height: 52px;
   height: 52px;
+  cursor: move;
 }
 .todos .todo.checked {
   color: #a6a6a6;
@@ -164,4 +169,25 @@ input, button {
 }
 .todos .todo:nth-child(odd) {
   background-color: #f4f7fa;
+}
+.todos li .reorder {
+	display: none;
+  float: right;
+	width: 40px;
+	height: 40px;
+	margin: auto 0;
+	font-size: 30px;
+	color: #cc9a9a;
+	margin-bottom: 11px;
+	transition: 1s;
+  margin-top: 5px;
+}
+.todos li .reorder:hover {
+	color: #af5b5e;
+}
+.todos li .reorder:after {
+	content: '×';
+}
+.todos li:hover .reorder {
+	display: inline;
 }
