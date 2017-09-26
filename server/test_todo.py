@@ -36,21 +36,27 @@ class TodoTestCase(unittest.TestCase):
         self.assertIn('React', str(res.data))
         self.assertIn('"position": 0', str(res.data))
 
+    def test_api_can_change_status(self):
+        '''Test API can change the status of an existing todo. (PUT request)'''
+        res = self.client().post('/todo/', data=self.todo)
+        self.assertEqual(res.status_code, 201)
+
+        res2 = self.client().put(
+            '/todo/1',
+            data={'new_status': 'completed'}
+        )
+        self.assertEqual(res2.status_code, 200)
+        self.assertIn("completed", str(res2.data))
+
     def test_todo_can_be_reordered(self):
         '''Test API can reorder an existing todo. (PUT request)'''
-        rv = self.client().post(
-            '/todo/',
-            data=self.todo
-        )
+        rv = self.client().post('/todo/', data=self.todo)
         self.assertEqual(rv.status_code, 201)
-        rv2 = self.client().post(
-            '/todo/',
-            data=self.todo
-        )
+        rv2 = self.client().post('/todo/', data=self.todo)
         self.assertEqual(rv2.status_code, 201)
 
         rv3 = self.client().put(
-            '/todo/1',
+            '/todo/1/reorder',
             data={'new_position': 1}
         )
         self.assertEqual(rv3.status_code, 200)
