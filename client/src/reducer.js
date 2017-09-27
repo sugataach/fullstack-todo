@@ -6,8 +6,11 @@ function findItemIndex(state, itemId) {
   );
 }
 
-function setState(state, newState) {
-  return state.merge(newState);
+function setState(state, todos) {
+  return state.merge({
+    todos: todos,
+    filter: 'all'
+  });
 }
 
 function toggleComplete(state, itemId) {
@@ -42,7 +45,7 @@ function addItem(state, text) {
 export default function(state = Map(), action) {
   switch (action.type) {
     case 'SET_STATE':
-      return setState(state, action.state);
+      return setState(state, action.todos);
     case 'TOGGLE_COMPLETE':
       return toggleComplete(state, action.itemId);
     case 'MARK_ALL_COMPLETED':
