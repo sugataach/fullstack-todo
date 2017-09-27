@@ -68,23 +68,18 @@ def create_app(config_name):
             return response
 
     @app.route('/api/v1/todo/<int:id>', methods=['PUT'])
-    def update_todo_status(id, **kwargs):
+    def update_todo_status(id):
         todo = db.session.query(Todo).get(id)
         if not todo:
             return send_error_msg()
 
         try:
-            new_status = str(request.data.get('new_status', None))
-            if new_status not in ['active', 'completed']:
-                raise Exception()
-            todo.status = new_status
+            if todo.status == "active":
+                todo.status = "completed"
+            else:
+                todo.status = "active"
             todo.save()
-            response = jsonify({
-                'id': todo.id,
-                'text': todo.text,
-                'position': todo.position,
-                'status': todo.status
-            })
+            response = jsonify({})
             response.status_code = 200
             return response
         except:
@@ -97,18 +92,10 @@ def create_app(config_name):
             return send_error_msg()
 
         try:
-            results = []
             for todo in todos:
                 todo.status = 'completed'
                 todo.save()
-                obj = {
-                    'id': todo.id,
-                    'text': todo.text,
-                    'position': todo.position,
-                    'status': todo.status
-                }
-                results.append(obj)
-            response = jsonify(results)
+            response = jsonify({})
             response.status_code = 200
             return response
         except:

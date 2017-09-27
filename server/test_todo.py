@@ -41,12 +41,8 @@ class TodoTestCase(unittest.TestCase):
         res = self.client().post('/api/v1/todo/', data=self.todo)
         self.assertEqual(res.status_code, 201)
 
-        res2 = self.client().put(
-            '/api/v1/todo/1',
-            data={'new_status': 'completed'}
-        )
+        res2 = self.client().put('/api/v1/todo/1')
         self.assertEqual(res2.status_code, 200)
-        self.assertIn("completed", str(res2.data))
 
     def test_api_can_change_status_for_all_todos(self):
         '''Test API can change the status of all todos. (PUT request)'''
