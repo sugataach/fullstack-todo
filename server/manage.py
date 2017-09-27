@@ -15,9 +15,10 @@ def seed():
     todo_list = models.TodoList()
     db.session.add(todo_list)
 
-    todo_list.todos.append(models.Todo(text="React"))
-    todo_list.todos.append(models.Todo(text="Redux"))
-    todo_list.todos.append(models.Todo(text="Immutable", status="completed"))
+    todo_list.todos.append(models.Todo(text="Discuss report with John"))
+    todo_list.todos.append(models.Todo(text="Get a haircut", status="completed"))
+    todo_list.todos.append(models.Todo(text="Pay electricity bill", status="completed"))
+    todo_list.todos.append(models.Todo(text="Check gym hours"))
     db.session.commit()
 
 @manager.command

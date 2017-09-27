@@ -1,6 +1,7 @@
 from flask_api import FlaskAPI
 from flask_sqlalchemy import SQLAlchemy
 from flask import request, jsonify, abort
+from flask_cors import CORS
 
 # local import
 from instance.config import app_config
@@ -17,12 +18,13 @@ def create_app(config_name):
     from app.models import Todo, TodoList
 
     app = FlaskAPI(__name__, instance_relative_config=True)
+    CORS(app)
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
 
-    @app.route('/todo/', methods=['POST', 'GET'])
+    @app.route('/api/v1/todo/', methods=['POST', 'GET'])
     def todo():
         if request.method == "POST":
             # POST
@@ -65,7 +67,7 @@ def create_app(config_name):
             response.status_code = 200
             return response
 
-    @app.route('/todo/<int:id>', methods=['PUT'])
+    @app.route('/api/v1/todo/<int:id>', methods=['PUT'])
     def update_todo_status(id, **kwargs):
         todo = db.session.query(Todo).get(id)
         if not todo:
@@ -88,7 +90,31 @@ def create_app(config_name):
         except:
             return send_error_msg()
 
-    @app.route('/todo/<int:id>/reorder', methods=['PUT'])
+    @app.route('/api/v1/todo/complete', methods=['PUT'])
+    def update_all_todo_statuses():
+        todos = db.session.query(TodoList).get(1).todos
+        if not todos:
+            return send_error_msg()
+
+        try:
+            results = []
+            for todo in todos:
+                todo.status = 'completed'
+                todo.save()
+                obj = {
+                    'id': todo.id,
+                    'text': todo.text,
+                    'position': todo.position,
+                    'status': todo.status
+                }
+                results.append(obj)
+            response = jsonify(results)
+            response.status_code = 200
+            return response
+        except:
+            return send_error_msg()
+
+    @app.route('/api/v1/todo/<int:id>/reorder', methods=['PUT'])
     def reorder_todo(id, **kwargs):
         todo = db.session.query(Todo).get(id)
         todolist = db.session.query(TodoList).get(1)
