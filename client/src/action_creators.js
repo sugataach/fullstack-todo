@@ -13,14 +13,7 @@ export function markAllAsCompleted() {
   }
 }
 
-export function addItem(text) {
-  return {
-    type: 'ADD_ITEM',
-    text
-  }
-}
-
-const apiUrl = 'http://localhost:5000/api/v1/todo';
+const apiUrl = 'http://localhost:5000/api/v1/todo/';
 // Sync Action
 export const fetchAllSuccess = (todos) => {
   return {
@@ -29,7 +22,7 @@ export const fetchAllSuccess = (todos) => {
   }
 };
 //Async Action
-export const fetchTodos = () => {
+export const fetchAll = () => {
   // Returns a dispatcher function
   // that dispatches an action at a later time
   return (dispatch) => {
@@ -39,6 +32,25 @@ export const fetchTodos = () => {
         // Dispatch another action
         // to consume data
         dispatch(fetchAllSuccess(response.data))
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export function addItemSuccess(item) {
+  return {
+    type: 'ADD_ITEM',
+    item
+  }
+}
+
+export const addItem = (text) => {
+  return (dispatch) => {
+    return Axios.post(apiUrl, {'text':text})
+      .then(response => {
+        dispatch(addItemSuccess(response.data))
       })
       .catch(error => {
         throw(error);

@@ -36,9 +36,8 @@ function markAllAsCompleted(state) {
   );
 }
 
-function addItem(state, text) {
-  const itemId = state.get('todos').reduce((maxId, item) => Math.max(maxId, item.get('id')), 0) + 1;
-  const newItem = Map({id: itemId, text: text, status: 'active'});
+function addItem(state, item) {
+  const newItem = Map({id: item['id'], text: item['text'], status: item['status']});
   return state.update('todos', (todos) => todos.push(newItem));
 }
 
@@ -51,7 +50,7 @@ export default function(state = Map(), action) {
     case 'MARK_ALL_COMPLETED':
       return markAllAsCompleted(state);
     case 'ADD_ITEM':
-      return addItem(state, action.text);
+      return addItem(state, action.item);
   }
   return state;
 }

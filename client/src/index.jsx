@@ -10,7 +10,7 @@ import configureStore from './store/configureStore';
 import * as todoActions from './action_creators'
 
 const store = configureStore();
-store.dispatch(todoActions.fetchTodos());
+store.dispatch(todoActions.fetchAll());
 
 require('./main.css')
 
