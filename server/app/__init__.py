@@ -2,7 +2,6 @@ from flask_api import FlaskAPI
 from flask_sqlalchemy import SQLAlchemy
 from flask import request, jsonify, abort
 from flask_cors import CORS
-
 # local import
 from instance.config import app_config
 
@@ -10,7 +9,8 @@ from instance.config import app_config
 db = SQLAlchemy()
 
 def send_error_msg(e=None):
-    response = jsonify({'error':e})
+    print(str(e))
+    response = jsonify({'error':str(e)})
     response.status_code = 400
     return response
 
@@ -102,24 +102,30 @@ def create_app(config_name):
             return send_error_msg()
 
     @app.route('/api/v1/todo/<int:id>/reorder', methods=['PUT'])
-    def reorder_todo(id, **kwargs):
+    def reorder_todo(id):
         todo = db.session.query(Todo).get(id)
         todolist = db.session.query(TodoList).get(1)
-
         if not todo:
             return send_error_msg()
 
         try:
             new_position = int(request.data.get('new_position', None))
-            if new_position:
-                # pop the element at position, update the new position
-                todolist.todos.insert(new_position, todolist.todos.pop(todo.position))
+            if new_position != None:
+
+                if new_position > db.session.query(db.func.max(Todo.position)).scalar():
+                    todolist.todos.append(todolist.todos.pop(todo.position))
+                    todolist.todos.reorder()
+                else:
+                    if new_position < db.session.query(db.func.min(Todo.position)).scalar():
+                        new_position = 0
+                    # pop the element at position, update the new position
+                    todolist.todos.insert(new_position, todolist.todos.pop(todo.position))
                 db.session.commit()
 
                 response = jsonify({})
                 response.status_code = 200
                 return response
-        except Exception:
-            return send_error_msg()
+        except Exception as e:
+            return send_error_msg(e)
 
     return app

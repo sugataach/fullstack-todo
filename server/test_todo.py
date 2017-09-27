@@ -68,6 +68,45 @@ class TodoTestCase(unittest.TestCase):
         )
         self.assertEqual(rv3.status_code, 200)
 
+    def test_todo_can_be_reordered_to_zero(self):
+        '''Test API can reorder an existing todo. (PUT request)'''
+        rv = self.client().post('/api/v1/todo/', data=self.todo)
+        self.assertEqual(rv.status_code, 201)
+        rv2 = self.client().post('/api/v1/todo/', data=self.todo)
+        self.assertEqual(rv2.status_code, 201)
+
+        rv3 = self.client().put(
+            '/api/v1/todo/2/reorder',
+            data={'new_position': 0}
+        )
+        self.assertEqual(rv3.status_code, 200)
+
+    def test_todo_can_be_reordered_to_negative_value(self):
+        '''Test API can reorder an existing todo. (PUT request)'''
+        rv = self.client().post('/api/v1/todo/', data=self.todo)
+        self.assertEqual(rv.status_code, 201)
+        rv2 = self.client().post('/api/v1/todo/', data=self.todo)
+        self.assertEqual(rv2.status_code, 201)
+
+        rv3 = self.client().put(
+            '/api/v1/todo/2/reorder',
+            data={'new_position': -23}
+        )
+        self.assertEqual(rv3.status_code, 200)
+
+    def test_todo_can_be_reordered_to_index_out_of_range(self):
+        '''Test API can reorder an existing todo. (PUT request)'''
+        rv = self.client().post('/api/v1/todo/', data=self.todo)
+        self.assertEqual(rv.status_code, 201)
+        rv2 = self.client().post('/api/v1/todo/', data=self.todo)
+        self.assertEqual(rv2.status_code, 201)
+
+        rv3 = self.client().put(
+            '/api/v1/todo/2/reorder',
+            data={'new_position': 23}
+        )
+        self.assertEqual(rv3.status_code, 200)
+
     def tearDown(self):
         with self.app.app_context():
             db.session.remove()
