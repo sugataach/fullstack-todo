@@ -1,12 +1,5 @@
 import Axios from 'axios';
 
-export function toggleComplete(itemId) {
-  return {
-    type: 'TOGGLE_COMPLETE',
-    itemId
-  }
-}
-
 export function markAllAsCompleted() {
   return {
     type: 'MARK_ALL_COMPLETED'
@@ -51,6 +44,26 @@ export const addItem = (text) => {
     return Axios.post(apiUrl, {'text':text})
       .then(response => {
         dispatch(addItemSuccess(response.data))
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export function toggleCompleteSuccess(item) {
+  return {
+    type: 'TOGGLE_COMPLETE',
+    item
+  }
+}
+
+export const toggleComplete = (itemId) => {
+  const new_apiUrl = apiUrl.concat(String(itemId))
+  return (dispatch) => {
+    return Axios.put(new_apiUrl)
+      .then(response => {
+        dispatch(toggleCompleteSuccess(response.data))
       })
       .catch(error => {
         throw(error);
