@@ -13,14 +13,14 @@ function setState(state, todos) {
   });
 }
 
-function toggleComplete(state, item) {
+function toggleComplete(state, itemId) {
   // get index of item w/ itemId
-  const itemIndex = findItemIndex(state, item['id']);
+  const itemIndex = findItemIndex(state, itemId);
 
   // update item's status to the inverse
   const updatedItem = state.get('todos')
                            .get(itemIndex)
-                           .update('status', status => item['status']);
+                           .update('status', status => status === 'active' ? 'completed' : 'active');
 
   // update the todos store and set the item
   return state.update('todos', todos => todos.set(itemIndex, updatedItem));
@@ -46,7 +46,7 @@ export default function(state = Map(), action) {
     case 'SET_STATE':
       return setState(state, action.todos);
     case 'TOGGLE_COMPLETE':
-      return toggleComplete(state, action.item);
+      return toggleComplete(state, action.itemId);
     case 'MARK_ALL_COMPLETED':
       return markAllAsCompleted(state);
     case 'ADD_ITEM':

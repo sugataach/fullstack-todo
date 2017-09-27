@@ -1,11 +1,5 @@
 import Axios from 'axios';
 
-export function markAllAsCompleted() {
-  return {
-    type: 'MARK_ALL_COMPLETED'
-  }
-}
-
 const apiUrl = 'http://localhost:5000/api/v1/todo/';
 // Sync Action
 export const fetchAllSuccess = (todos) => {
@@ -51,10 +45,10 @@ export const addItem = (text) => {
   };
 };
 
-export function toggleCompleteSuccess(item) {
+export function toggleCompleteSuccess(itemId) {
   return {
     type: 'TOGGLE_COMPLETE',
-    item
+    itemId
   }
 }
 
@@ -63,7 +57,30 @@ export const toggleComplete = (itemId) => {
   return (dispatch) => {
     return Axios.put(new_apiUrl)
       .then(response => {
-        dispatch(toggleCompleteSuccess(response.data))
+        if (response.status == 200) {
+          dispatch(toggleCompleteSuccess(itemId))
+        }
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export function markAllAsCompletedSuccess() {
+  return {
+    type: 'MARK_ALL_COMPLETED'
+  }
+}
+
+export const markAllAsCompleted = () => {
+  const new_apiUrl = apiUrl.concat("complete")
+  return (dispatch) => {
+    return Axios.put(new_apiUrl)
+      .then(response => {
+        if (response.status == 200) {
+          dispatch(markAllAsCompletedSuccess())
+        }
       })
       .catch(error => {
         throw(error);
