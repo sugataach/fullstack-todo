@@ -19,7 +19,7 @@ export default class TodoItem extends React.Component {
           </label>
         </div>
         <div className="mark-all col-md-6">
-          <button className="reorder"></button>
+          <a className="reorder"></a>
         </div>
       </div>
     </li>

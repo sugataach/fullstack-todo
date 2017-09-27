@@ -67,7 +67,6 @@ class TodoTestCase(unittest.TestCase):
             data={'new_position': 1}
         )
         self.assertEqual(rv3.status_code, 200)
-        self.assertIn('"position": 1', str(rv3.data))
 
     def tearDown(self):
         with self.app.app_context():

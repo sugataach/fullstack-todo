@@ -82,7 +82,7 @@ def create_app(config_name):
             response = jsonify({})
             response.status_code = 200
             return response
-        except:
+        except Exception:
             return send_error_msg()
 
     @app.route('/api/v1/todo/complete', methods=['PUT'])
@@ -98,7 +98,7 @@ def create_app(config_name):
             response = jsonify({})
             response.status_code = 200
             return response
-        except:
+        except Exception:
             return send_error_msg()
 
     @app.route('/api/v1/todo/<int:id>/reorder', methods=['PUT'])
@@ -116,19 +116,10 @@ def create_app(config_name):
                 todolist.todos.insert(new_position, todolist.todos.pop(todo.position))
                 db.session.commit()
 
-                results = []
-                for todo in todolist.todos:
-                    obj = {
-                        'id': todo.id,
-                        'text': todo.text,
-                        'position': todo.position,
-                        'status': todo.status
-                    }
-                    results.append(obj)
-                response = jsonify(results)
+                response = jsonify({})
                 response.status_code = 200
                 return response
-        except:
+        except Exception:
             return send_error_msg()
 
     return app

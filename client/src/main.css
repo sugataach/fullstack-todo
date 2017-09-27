@@ -176,17 +176,17 @@ input, button {
 	width: 40px;
 	height: 40px;
 	margin: auto 0;
-	font-size: 30px;
-	color: #cc9a9a;
+	font-size: 20px;
+	color: gray;
 	margin-bottom: 11px;
 	transition: 1s;
-  margin-top: 5px;
+  margin-top: 3px;
 }
 .todos li .reorder:hover {
 	color: #af5b5e;
 }
 .todos li .reorder:after {
-	content: '×';
+	content: '↕';
 }
 .todos li:hover .reorder {
 	display: inline;
