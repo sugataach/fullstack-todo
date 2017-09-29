@@ -21,6 +21,7 @@ export const fetchAll = () => {
         dispatch(fetchAllSuccess(response.data))
       })
       .catch(error => {
+        alert("Network failure. \nPlease check that the server is running on http://localhost:5000");
         throw(error);
       });
   };
@@ -101,7 +102,7 @@ export const reorderItem = (itemId, oldIndex, newIndex) => {
     return Axios.put(new_apiUrl, {'new_position': newIndex})
       .then(response => {
         if (response.status == 200) {
-          dispatch(reorderItemSuccess(response.data))
+          dispatch(reorderItemSuccess(response.data, itemId, oldIndex, newIndex))
         }
       })
       .catch(error => {

@@ -38,17 +38,11 @@ function markAllAsCompleted(state) {
 
 function addItem(state, item) {
   const newItem = Map({id: item['id'], text: item['text'], status: item['status']});
+  // location.reload();
   return state.update('todos', (todos) => todos.push(newItem));
-  // const updated_todos = state.get('todos').push(newItem);
-  // reorderItem(state, updated_todos);
-  // return state.merge({
-  //   todos: updated_todos
-  // });
 }
 
 function reorderItem(state, updated_todos, itemId, oldIndex, newIndex) {
-  // console.log(updated_todos[newIndex]);
-  // return state.update('todos', (todos) => todos.set(newIndex, updated_todos[newIndex]))
   return state.merge({
     todos: updated_todos
   });

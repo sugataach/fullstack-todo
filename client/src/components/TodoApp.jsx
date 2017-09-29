@@ -4,13 +4,9 @@ import * as actionCreators from '../action_creators';
 import TodoList from './TodoList';
 import TodoHeader from './TodoHeader';
 import TodoTools from './TodoTools';
-import {SortableContainer, arrayMove} from 'react-sortable-hoc';
+import {SortableContainer} from 'react-sortable-hoc';
 
 const TodoListSortable = SortableContainer(TodoList);
-// console.log = function() { return false;}
-// window.console.log = window.console.debug = window.console.info = window.console.error = function () {
-//     return false;
-// }
 
 export class TodoApp extends React.Component {
   getNbActiveItems() {
@@ -23,8 +19,6 @@ export class TodoApp extends React.Component {
     return 0;
   }
   onSortEnd({oldIndex, newIndex}) {
-    console.log(this.props.todos);
-    console.log(oldIndex);
     const itemId = this.props.todos._tail.array[oldIndex]._root.entries[0][1];
     return this.props.reorderItem(itemId, oldIndex, newIndex);
   }

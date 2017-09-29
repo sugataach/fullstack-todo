@@ -12,10 +12,14 @@ import * as todoActions from './action_creators'
 const store = configureStore();
 store.dispatch(todoActions.fetchAll());
 
+console.log = function() { return false; }
+window.console.log = window.console.debug = window.console.info = window.console.error = function () {
+    return false;
+}
+
 require('./main.css')
 
 ReactDOM.render(
-  // wrap Provider component to pass store down to components
   <Provider store={store}>
     <TodoAppContainer />
   </Provider>,
