@@ -2,38 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
 import TodoItem from './TodoItem';
-import TodoList from './TodoList';
 import TodoHeader from './TodoHeader';
 import TodoTools from './TodoTools';
-// import {SortableContainer} from 'react-sortable-hoc';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
-import classNames from 'classNames';
 
-// const TodoListSortable = SortableContainer(TodoList);
 const SortableItem = SortableElement(TodoItem);
-// const SortableList = SortableContainer(TodoList, {withRef: true});
-
-// const SortableItem = SortableElement(({value}) => {
-//   // console.log(props);
-//   return (
-//     <li className={'todo' + (value.get('status') === 'completed' ? ' checked' : '')}>
-//       <div className="row">
-//         <div className="all-cnt col-md-6">
-//           <input type="checkbox"
-//                  className="toggle"
-//                  checked={value.get('status') === 'completed' ? true : false}
-//                  onChange={actionCreators.toggleComplete(value.get('id'))}/>
-//           <label htmlFor="todo">
-//             {value.get('text')}
-//           </label>
-//         </div>
-//         <div className="mark-all col-md-6">
-//           <a className="reorder"></a>
-//         </div>
-//       </div>
-//     </li>
-//   );
-// });
 
 const SortableList = SortableContainer(({items, props}) => {
   return (
@@ -47,7 +20,6 @@ const SortableList = SortableContainer(({items, props}) => {
                         text={value.get('text')}
                         id={value.get('id')}
                         isCompleted={props.isCompleted(value)}
-                        toggleComplete={props['toggleComplete']}
                         {...props}/>
         )}
       </ul>

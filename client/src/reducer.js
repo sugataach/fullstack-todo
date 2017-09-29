@@ -38,7 +38,6 @@ function markAllAsCompleted(state) {
 
 function addItem(state, item) {
   const newItem = Map({id: item['id'], text: item['text'], status: item['status']});
-  // location.reload();
   return state.update('todos', (todos) => todos.push(newItem));
 }
 

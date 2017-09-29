@@ -3,7 +3,6 @@ import classNames from 'classNames';
 
 export default class TodoItem extends React.Component {
   render() {
-    console.log('------------------>', this);
     var itemClass = classNames({
       'todo': true,
       'completed': this.props.isCompleted
