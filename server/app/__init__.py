@@ -9,7 +9,6 @@ from instance.config import app_config
 db = SQLAlchemy()
 
 def send_error_msg(e=None):
-    print(str(e))
     response = jsonify({'error':str(e)})
     response.status_code = 400
     return response
@@ -46,8 +45,8 @@ def create_app(config_name):
                 })
                 response.status_code = 201
                 return response
-            except AttributeError:
-                return send_error_msg()
+            except AttributeError as e:
+                return send_error_msg(e)
         else:
             # GET
             try:
@@ -79,11 +78,16 @@ def create_app(config_name):
             else:
                 todo.status = "active"
             todo.save()
-            response = jsonify({})
+            response = jsonify({
+                'id': todo.id,
+                'text': todo.text,
+                'position': todo.position,
+                'status': todo.status
+            })
             response.status_code = 200
             return response
-        except Exception:
-            return send_error_msg()
+        except Exception as e:
+            return send_error_msg(e)
 
     @app.route('/api/v1/todo/complete', methods=['PUT'])
     def update_all_todo_statuses():
@@ -98,8 +102,8 @@ def create_app(config_name):
             response = jsonify({})
             response.status_code = 200
             return response
-        except Exception:
-            return send_error_msg()
+        except Exception as e:
+            return send_error_msg(e)
 
     @app.route('/api/v1/todo/<int:id>/reorder', methods=['PUT'])
     def reorder_todo(id):
@@ -121,8 +125,16 @@ def create_app(config_name):
                     # pop the element at position, update the new position
                     todolist.todos.insert(new_position, todolist.todos.pop(todo.position))
                 db.session.commit()
-
-                response = jsonify({})
+                results = []
+                for todo in todolist.todos:
+                    obj = {
+                        'id': todo.id,
+                        'text': todo.text,
+                        'position': todo.position,
+                        'status': todo.status
+                    }
+                    results.append(obj)
+                response = jsonify(results)
                 response.status_code = 200
                 return response
         except Exception as e:

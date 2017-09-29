@@ -43,6 +43,7 @@ class TodoTestCase(unittest.TestCase):
 
         res2 = self.client().put('/api/v1/todo/1')
         self.assertEqual(res2.status_code, 200)
+        self.assertEqual(res2.status_code, 200)
 
     def test_api_can_change_status_for_all_todos(self):
         '''Test API can change the status of all todos. (PUT request)'''
@@ -67,6 +68,8 @@ class TodoTestCase(unittest.TestCase):
             data={'new_position': 1}
         )
         self.assertEqual(rv3.status_code, 200)
+        result = json.loads(str(rv3.data.decode('UTF-8')))
+        self.assertEqual(1, result[1]['id'])
 
     def test_todo_can_be_reordered_to_zero(self):
         '''Test API can reorder an existing todo. (PUT request)'''
@@ -80,6 +83,8 @@ class TodoTestCase(unittest.TestCase):
             data={'new_position': 0}
         )
         self.assertEqual(rv3.status_code, 200)
+        result = json.loads(str(rv3.data.decode('UTF-8')))
+        self.assertEqual(2, result[0]['id'])
 
     def test_todo_can_be_reordered_to_negative_value(self):
         '''Test API can reorder an existing todo. (PUT request)'''
@@ -93,6 +98,8 @@ class TodoTestCase(unittest.TestCase):
             data={'new_position': -23}
         )
         self.assertEqual(rv3.status_code, 200)
+        result = json.loads(str(rv3.data.decode('UTF-8')))
+        self.assertEqual(2, result[0]['id'])
 
     def test_todo_can_be_reordered_to_index_out_of_range(self):
         '''Test API can reorder an existing todo. (PUT request)'''
