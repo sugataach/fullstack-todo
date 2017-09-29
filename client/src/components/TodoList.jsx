@@ -1,5 +1,8 @@
 import React from 'react'
 import TodoItem from './TodoItem'
+import {SortableElement} from 'react-sortable-hoc';
+
+const TodoItemSortable = SortableElement(TodoItem);
 
 export default class TodoList extends React.Component {
   getItems() {
@@ -17,11 +20,13 @@ export default class TodoList extends React.Component {
     return <section className="body">
       <ul className="todos">
         {this.getItems().map(item =>
-          <TodoItem key={item.get('id')}
-                    text={item.get('text')}
-                    id={item.get('id')}
-                    isCompleted={this.isCompleted(item)}
-                    toggleComplete={this.props.toggleComplete}/>
+          <TodoItemSortable key={item.get('id')}
+                            text={item.get('text')}
+                            id={item.get('id')}
+                            index={item.get('position')}
+                            value={item.get('text')}
+                            isCompleted={this.isCompleted(item)}
+                            toggleComplete={this.props.toggleComplete}/>
         )}
       </ul>
     </section>

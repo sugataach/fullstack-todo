@@ -87,3 +87,25 @@ export const markAllAsCompleted = () => {
       });
   };
 };
+
+export function reorderItemSuccess(updated_todos) {
+  return {
+    type: 'REORDER_ITEM',
+    updated_todos
+  }
+}
+
+export const reorderItem = (itemId, oldIndex, newIndex) => {
+  const new_apiUrl = apiUrl.concat(String(itemId)).concat("/reorder");
+  return (dispatch) => {
+    return Axios.put(new_apiUrl, {'new_position': newIndex})
+      .then(response => {
+        if (response.status == 200) {
+          dispatch(reorderItemSuccess(response.data))
+        }
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
