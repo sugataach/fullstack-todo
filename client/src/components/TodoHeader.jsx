@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class TodoHeader extends React.Component {
   _handleInteraction(e) {
-    if (e.key && e.key == 'Enter' && this.refs.addTodoInput.value != '' || !e.key && this.refs.addTodoInput.value != '') {
+    if (this.refs.addTodoInput.value != '') {
       const itemText = this.refs.addTodoInput.value;
       this.refs.addTodoInput.value = '';
       return this.props.addItem(itemText);
