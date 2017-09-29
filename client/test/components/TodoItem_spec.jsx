@@ -19,16 +19,6 @@ describe('TodoItem', () => {
     expect(todo[0].textContent).to.contain('React');
   });
 
-  it('strikes through the item if it is completed', () => {
-    const text = 'React';
-    const component = renderIntoDocument(
-      <TodoItem text={text} isCompleted={true} />
-    );
-    const todo = scryRenderedDOMComponentsWithTag(component, 'li');
-
-    expect(todo[0].classList.contains('completed')).to.equal(true);
-  });
-
   it('should be checked if the item is completed', () => {
     const text = 'React';
     const text2 = 'Redux';
