@@ -27,7 +27,7 @@ export default class TodoHeader extends React.Component {
               <input type="text"
                      className="form-control"
                      ref="addTodoInput"
-                     maxLength="60"
+                     maxLength="43"
                      placeholder="What needs to be done?"/>
             </div>
           </div>
