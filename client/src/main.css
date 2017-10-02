@@ -2,6 +2,14 @@ input, button {
  outline:none;
 }
 
+ul {
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}
+
 .todo-page-body {
   font-family: 'Open Sans', sans-serif;
   background-color: #f6f5f5;
