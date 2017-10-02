@@ -102,7 +102,7 @@ export const reorderItem = (itemId, oldIndex, newIndex) => {
     return Axios.put(new_apiUrl, {'new_position': newIndex})
       .then(response => {
         if (response.status == 200) {
-          dispatch(reorderItemSuccess(response.data, itemId, oldIndex, newIndex))
+          dispatch(reorderItemSuccess(response.data))
         }
       })
       .catch(error => {

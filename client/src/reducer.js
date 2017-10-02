@@ -41,7 +41,7 @@ function addItem(state, item) {
   return state.update('todos', (todos) => todos.push(newItem));
 }
 
-function reorderItem(state, updated_todos, itemId, oldIndex, newIndex) {
+function reorderItem(state, updated_todos) {
   return state.merge({
     todos: updated_todos
   });
@@ -58,7 +58,7 @@ export default function(state = Map(), action) {
     case 'ADD_ITEM':
       return addItem(state, action.item);
     case 'REORDER_ITEM':
-      return reorderItem(state, action.updated_todos, action.itemId, action.oldIndex, action.newIndex)
+      return reorderItem(state, action.updated_todos)
   }
   return state;
 }
