@@ -134,6 +134,7 @@ input, button {
   line-height: 52px;
   height: 52px;
   cursor: move;
+  transition: 1s;
 }
 .todos .todo.checked {
   color: #a6a6a6;
