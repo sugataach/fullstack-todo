@@ -1,6 +1,6 @@
 alembic==0.9.5
 click==6.7
-Flask==0.12.2
+Flask==1.0
 Flask-API==1.0
 Flask-Cors==3.0.3
 Flask-Migrate==2.1.1
